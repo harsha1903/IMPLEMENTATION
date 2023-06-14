@@ -274,13 +274,50 @@ node * naiveITErev(node *head){
 
 node * efficientITErev(node *head){
     node *prev=nullptr,*next=nullptr;
-    while(head){
-        next=head->next;
-        head->next=prev;
-        prev=head;
-        head=next;
+    node *curr=head;
+    while(curr){
+        next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
     }
     return prev;
+}
+
+node * RECrev1(node *head){
+    if(head==nullptr || head->next==nullptr){
+        return head;
+    }
+    node *temp=RECrev1(head->next);
+    node *next_head=head->next;
+    head->next=nullptr;
+    next_head->next=head;
+    return temp;
+}
+
+node * RECrev2(node *curr,node * prev){
+    if(curr==nullptr){
+        return prev;
+    }
+    node * next=curr->next;
+    curr->next=prev;
+    prev=curr;
+    curr=next;
+    return RECrev2(curr,prev);
+}
+
+void remDUP(node *head){
+    node *curr=head;
+    while(curr!=nullptr && curr->next!=nullptr){
+        if(curr->data==curr->next->data){
+            node *temp=curr->next;
+            curr->next=curr->next->next;
+            delete temp;
+        }
+        else{
+            curr=curr->next;
+        }
+    }
 }
 
 int main()
@@ -294,64 +331,67 @@ int main()
         var=var->next;
     }
     //PRINTING LINKED LIST
-    // ITEprintlist(head);
-    // RECprintlist(head);
+    ITEprintlist(head);
+    RECprintlist(head);
     
     //SEARCHING A KEY IN LINKED LIST
-    // int key;
-    // cin>>key;
-    // cout<<ITEsearchlist(head,key)<<endl;
-    // cout<<RECsearchlist(head,key)<<endl;
+    int key;
+    cin>>key;
+    cout<<ITEsearchlist(head,key)<<endl;
+    cout<<RECsearchlist(head,key)<<endl;
     
     //INSERT at Begin of singly LINKED LIST
-    // int data;
-    // cin>>data;
-    // head=insertAtBegin(head,data);
+    int data;
+    cin>>data;
+    head=insertAtBegin(head,data);
 
     // INSERT at End of singly LINKED LIST
-    // int data;
-    // cin>>data;
-    // head = insertAtEnd(head,data);
+    int data;
+    cin>>data;
+    head = insertAtEnd(head,data);
     
     //INSERT at given POSITION in singly LINKED LIST
-    // int data,position;
-    // cin>>data>>position;
-    // head=insertAtGivenPosition(head,data,position);
+    int data,position;
+    cin>>data>>position;
+    head=insertAtGivenPosition(head,data,position);
     
     // DELETE at Begin of singly LINKED LIST
-    // head=deleteAtBegin(head);
+    head=deleteAtBegin(head);
         
     //DELETE at End of singly LINKED LIST
-    // head=deleteAtEnd(head);
+    head=deleteAtEnd(head);
     
     //DELETE at given POSITION in singly LINKED LIST
-    // int position;
-    // cin>>position;
-    // head=deleteAtGivenPosition(head,position);
+    int position;
+    cin>>position;
+    head=deleteAtGivenPosition(head,position);
    
-    //SORTED INSERT in a singly LINKED LIST
-    // int data;
-    // cin>>data;
-    // head=sortedInsert(head,data);
+    //SORTED INSERT in a Singly LINKED LIST
+    int data;
+    cin>>data;
+    head=sortedInsert(head,data);
     
     // MIDDLE of LINKED LIST
-    // naiveMiddleOfLinkedList(head);
-    // efficientMiddleOfLinkedList(head);
+    naiveMiddleOfLinkedList(head);
+    efficientMiddleOfLinkedList(head);
     
     // Nth Node FROM END of LINKED LIST
-    // int pos;
-    // cin>>pos;
-    // naiveNthNodeFromEnd(head,pos);
-    // efficientNthNodeFromEnd(head,pos);
+    int pos;
+    cin>>pos;
+    naiveNthNodeFromEnd(head,pos);
+    efficientNthNodeFromEnd(head,pos);
     
     // REVERSE a LINKED LIST
-    // head=naiveITErev(head);
+    head=naiveITErev(head);
     head=efficientITErev(head);
+    head=RECrev1(head);
+    head=RECrev2(head,nullptr);
+    
+    // REMOVE DUPLICATES from a SORTED Singly LINKED LIST
+    remDUP(head);
     ITEprintlist(head);
     
     //TO free up the dynamically allocated memory
     freeupMemory(head);
     return 0;
 }
-
-
