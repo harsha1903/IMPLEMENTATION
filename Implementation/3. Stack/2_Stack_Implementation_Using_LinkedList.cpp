@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits.h>
 using namespace std;
 
 struct node{
@@ -31,7 +32,7 @@ struct stack{
   int pop(){
     if(siz==0){ 
         //cout<<"underflow"<<endl;
-        return -1;
+        return INT_MAX;
     }
     siz--;
     int res=head->data;
@@ -44,7 +45,7 @@ struct stack{
   int top(){
       if(siz==0){
         //cout<<"underflow"<<endl;
-          return -1;
+          return INT_MAX;
       }
       return head->data;
   }
