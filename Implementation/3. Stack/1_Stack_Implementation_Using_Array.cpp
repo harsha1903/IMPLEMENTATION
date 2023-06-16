@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits.h>
 using namespace std;
 
 struct stack{
@@ -24,7 +25,7 @@ struct stack{
   int pop(){
     if(top==-1){
       //cout<<"underflow"<<endl;
-      return -1;
+      return INT_MAX;
     }
     int res=arr[top];
     top--;
@@ -34,7 +35,7 @@ struct stack{
   int peek(){
       if(top==-1){
         //cout<<"underflow"<<endl;  
-        return -1;
+        return INT_MAX;
       }
       return arr[top];
   }
