@@ -56,7 +56,7 @@ int main()
     int cap,data;
     cin>>cap;
     stack s(cap);
-    for(int i=0;i<cap-1;i++){
+    for(int i=0;i<cap;i++){
         cin>>data;
         s.push(data);
     }
