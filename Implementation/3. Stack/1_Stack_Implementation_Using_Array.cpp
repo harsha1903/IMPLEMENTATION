@@ -23,6 +23,7 @@ struct stack{
   
   int pop(){
     if(top==-1){
+      //cout<<"underflow"<<endl;
       return -1;
     }
     int res=arr[top];
@@ -32,7 +33,8 @@ struct stack{
   
   int peek(){
       if(top==-1){
-          return -1;
+        //cout<<"underflow"<<endl;  
+        return -1;
       }
       return arr[top];
   }
